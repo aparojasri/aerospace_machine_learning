@@ -1,0 +1,28 @@
+# Ignore virtual environment and dependency caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+
+# Ignore model files if needed
+*.pkl
+*.h5
+*.model
+*.joblib
+
+# Ignore notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore VSCode settings (if using)
+.vscode/
+
+# Ignore log files and temp files
+*.log
+*.tmp
+*.bak
+
+# Ignore images (if not needed in the repo)
+*.png
+*.jpg
+*.jpeg
