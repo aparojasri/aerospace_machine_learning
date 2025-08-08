@@ -1,56 +1,37 @@
-# aerospace-data\_analytics
 
-Propeller Performance Prediction Using Machine Learning
 
-Project Overview:
+# Propeller Performance Prediction Using Machine Learning
 
-This project aims to develop a machine learning pipeline for predicting the performance of aircraft propellers using data from the UIUC Propeller Database. We leveraged data preprocessing, feature engineering, hyperparameter tuning, and model deployment to create an efficient, real-time prediction API.
+### Project Overview
 
-Data Sources:
+This project presents a complete, end-to-end machine learning pipeline for predicting the aerodynamic performance of small-scale aircraft propellers. Traditional methods like wind-tunnel testing or CFD are expensive and time-consuming. This project builds a fast and accurate **data-driven surrogate model** using the canonical UIUC Propeller Database.
 
-* Experimental Data: Measurements of propeller performance (e.g., thrust, power, efficiency) across different test conditions.
-* Geometric Data: Propeller blade dimensions and physical characteristics.
- Steps Involved:
+The pipeline integrates classical aerodynamic principles with modern machine learning techniques to forecast key performance metrics—**Thrust Coefficient (Cₜ), Power Coefficient (Cₚ), and Efficiency (η)**—directly from a propeller's geometry and operating conditions.
 
-1. Data Loading and Preprocessing:
+The final, trained model is deployed via a **REST API using FastAPI and Docker**, making it a scalable, real-time tool ready for integration into engineering design and optimization workflows.
 
-   * Loaded experimental and geometric data from multiple volumes.
-   * Merged these datasets based on common keys.
-   * Cleaned and standardized the data to remove duplicates and handle missing values.
+---
+### Key Features & Outcomes
 
-2. Feature Engineering:
+* **High Predictive Accuracy:** Achieved an **R² > 0.98** and **MAE < 0.005** on the held-out test data using an Optuna-tuned Gradient Boosting Regressor. The model's low bias and uniform error were validated with Predicted vs. Actual and Residual plots.
+* **Physics-Informed Feature Engineering:** Demonstrated the importance of domain knowledge by creating high-impact features like **Advance Ratio (J)**, **Solidity (σ)**, and **Blade Loading**, which were proven to be the most influential predictors through SHAP analysis.
+* **Reproducible ML Pipeline:** The entire workflow—from data cleaning and feature scaling to polynomial expansion and modeling—is encapsulated in a single, professional `scikit-learn` pipeline, ensuring full reproducibility.
+* **Scalable Deployment:** The trained model is serialized with `joblib` and served via a **FastAPI** application with Pydantic data validation. The entire application is containerized with **Docker** for portable, scalable, real-time inference.
+* **In-depth Exploratory Data Analysis (EDA):** The project includes a comprehensive analysis of the UIUC dataset, using histograms, scatter plots, pairplots, and correlation heatmaps to uncover key aerodynamic trends and guide the modeling process.
 
-   * Created physics-based features like blade loading, power coefficient, and log-transformed coefficients to capture key aerodynamic relationships.
-   * Added derived features like solidity and advance ratio squared for better predictive power.
+---
+### Technologies & Libraries Used
 
-3. Exploratory Data Analysis (EDA):
+* **Programming Language:** Python 3.9+
+* **Data Science Stack:** pandas, NumPy, scikit-learn
+* **Visualization:** Matplotlib, Seaborn
+* **Hyperparameter Tuning:** Optuna
+* **Model Interpretation:** SHAP
+* **API & Deployment:** FastAPI, Docker, joblib
 
-   * Conducted scatter plots, correlation heatmaps, and pairplots to understand relationships between features and target variables.
-   * Used statistical summaries to assess the quality and distribution of the data.
+---
+### Future Work
 
-4. Model Training and Optimization:
-
-   * Employed Gradient Boosting Regressor (GBR) for robust and interpretable predictions.
-   * Performed hyperparameter tuning using Optuna to find the optimal model configuration.
-   * Saved the trained model pipeline for deployment.
-
-5. Deployment Preparation:
-
-   * Developed a FastAPI application for real-time model predictions.
-   * Implemented data validation using Pydantic to ensure input consistency.
-   * Created structured endpoints for seamless integration with other systems.
-
-6. Testing and Debugging:
-
-   * Resolved common issues like file path mismatches, missing dependencies, and data type conflicts to ensure a smooth deployment.
-Key Outcomes:
-
-* Accurate Predictions: Achieved high model accuracy on test data, with optimized hyperparameters.
-* Reusable Pipeline: Created a flexible pipeline that can be easily adapted to other propeller datasets.
-* Real-time Inference: Built a FastAPI backend for efficient, scalable predictions.
-
-Potential Extensions:
-
-* Integration with a front-end application for real-time performance visualization.
-* Deployment to a cloud environment for scalability.
-* Additional model tuning to improve efficiency and reduce latency.
+* **Frontend Integration:** Develop a web-based front-end application (e.g., using Streamlit or React) to provide a user-friendly interface for real-time performance visualization.
+* **Cloud Deployment:** Deploy the containerized application to a cloud service like AWS, Google Cloud, or Heroku for enhanced scalability and accessibility.
+* **Advanced Modeling:** Explore more advanced models or ensemble techniques to further improve prediction accuracy and reduce inference latency.
